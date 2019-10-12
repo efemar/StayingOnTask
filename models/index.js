@@ -39,4 +39,16 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.Task.belongsTo(db.Project);
+db.Task.belongsTo(db.CategoryType);
+db.Project.belongsTo(db.ProjectType);
+db.TemplateTask.belongsTo(db.ProjectType);
+db.TemplateTask.belongsTo(db.CategoryType);
+
+db.Project.hasMany(db.Task);
+db.CategoryType.hasMany(db.Task);
+db.ProjectType.hasMany(db.Project);
+db.ProjectType.hasMany(db.TemplateTask);
+db.CategoryType.hasMany(db.TemplateTask);
+
 module.exports = db;

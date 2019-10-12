@@ -22,13 +22,16 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+//require("./routes/apiRoutes")(app);
+//require("./routes/htmlRoutes")(app);
+require("./routes/apiRoute")(app);
+require("./routes/htmlRoute")(app);
 
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
+
 if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
