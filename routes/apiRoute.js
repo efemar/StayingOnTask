@@ -8,13 +8,18 @@ module.exports = function(app) {
 
   app.post("/projects", function(req, res) {
     db.Project.create(req.body).then(function(result) {
-      res.json(result);
       /* result will be like below:
       {"id":1,"name":"Sunny's birthday Party","description":"a nice small party for Sunny",
       "projectDate":"2019-12-12","creatorName":"Elisa","ProjectTypeId":"1",
       "updatedAt":"2019-10-12T00:52:36.141Z","createdAt":"2019-10-12T00:52:36.141Z"}
       Also got an error on terminal about moment.js regarding project date
       */
+      var projectTypeId = result.ProjectTypeId;
+      var projectId = result.id;
+
+      addTemplateTaskToProject(projectTypeId, projectId);
+
+      res.json(result);
     });
   });
 
@@ -102,4 +107,36 @@ module.exports = function(app) {
       // result is number 1
     });
   });
+
+  function addTemplateTaskToProject(ProjectTypeId, ProjectId) {
+    db.TemplateTask.findAll({
+      where: { ProjectTypeId: ProjectTypeId },
+      order: [["CategoryTypeId", "ASC"]]
+    }).then(function(results) {
+      // results is an array of template task objects
+
+      for (var i = 0; i < results.length; i++) {
+        var taskObj = {};
+
+        taskObj.description = results[i].description;
+        taskObj.ProjectId = ProjectId;
+        taskObj.CategoryTypeId = results[i].CategoryTypeId;
+
+        db.Task.create(taskObj)
+          .then(function() {
+            /* result returned is the newly ceated task object
+          {"completed":false,"id":1,"description":"task a","completeByDate":"2019-11-01",
+          "ProjectId":"2","CategoryTypeId":"3","updatedAt":"2019-10-12T04:00:17.549Z",
+          "createdAt":"2019-10-12T04:00:17.549Z"}
+          */
+          })
+          .catch(function(error) {
+            if (error) {
+              return false;
+            }
+          });
+      }
+    });
+    return true;
+  }
 };
