@@ -1,4 +1,5 @@
 var db = require("../models");
+var moment = require("moment");
 
 module.exports = function(app) {
   app.get("/newprojects", function(req, res) {
@@ -7,7 +8,14 @@ module.exports = function(app) {
   });
 
   app.post("/projects", function(req, res) {
-    db.Project.create(req.body).then(function(result) {
+    var newProject = {};
+    newProject.name = req.body.name;
+    newProject.description = req.body.description;
+    newProject.projectDate = moment(req.body.projectDate, "MM/DD/YYYY");
+    newProject.creatorName = req.body.creatorName;
+    newProject.ProjectTypeId = req.body.ProjectTypeId;
+
+    db.Project.create(newProject).then(function(result) {
       /* result will be like below:
       {"id":1,"name":"Sunny's birthday Party","description":"a nice small party for Sunny",
       "projectDate":"2019-12-12","creatorName":"Elisa","ProjectTypeId":"1",
