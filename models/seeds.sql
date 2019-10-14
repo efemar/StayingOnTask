@@ -1,3 +1,5 @@
+Use exampledb;
+
 INSERT INTO ProjectTypes SET name="birthday",createdAt=now(),updatedAt=now();
 
 INSERT INTO CategoryTypes(name,createdAt,updatedAt) 

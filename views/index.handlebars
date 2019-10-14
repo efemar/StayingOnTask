@@ -1,33 +1,43 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
+<!-- first page -->
+<main>
+    <div id="homePage" class="firstPage ">
+        <!-- Navigation bar -->
+        <nav class=" navigation">
+            <div class="container">
+                <div class="nav-wrapper ">
+
+                    <!-- Navigation Links -->
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href=" " class="topNavHome">Home</a></li>
+                        <li><a href=" " class="topNavSearch">Login</a></li>
+                        <li><a href=" " class="topNavContact">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <!-- section with slogan -->
+            <section class="main-section">
+                <div class="row">
+                    <div class="col l8 m9 s12">
+                        <div class="centerText">
+                            <h1 class="welcome">Stay on Task</h1>
+                            <h3 class="onePatient">a roadmap to completion</h3>
+                            <a class="bigButtons waves-effect waves-light btn-large " href="/login"><i
+                                    class="material-icons right">expand_more</i> <span id="project">Get
+                                    Started</span></a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </section>
     </div>
-  </div>
-</div>
+    
+
+</main>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+<!-- our javascript -->
+{{!-- <script src="../public/js/index.js"></script> --}}
+<script type="text/javascript" src="../public/js/materialize.js"></script>

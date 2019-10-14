@@ -1,9 +1,9 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  app.get("/projects", function(req, res) {
-    // res.render("newprojects")
-    res.send("This is add new project page!");
+  app.get("/newprojects", function(req, res) {
+    res.render("newprojects");
+    //res.send("This is add new project page!");
   });
 
   app.post("/projects", function(req, res) {
