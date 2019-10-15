@@ -23,12 +23,6 @@ module.exports = function(app) {
     res.render("login");
   });
 
-  app.get("/dashboard", isAuthenticated, function(req, res) {
-    db.Project.findAll({}).then(function(data) {
-      res.render("dashboard", { username: req.user.userName, projects: data });
-    });
-  });
-
   app.get("/newprojects", isAuthenticated, function(req, res) {
     res.render("newprojects", { username: req.user.userName });
   });
