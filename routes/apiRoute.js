@@ -27,6 +27,10 @@ module.exports = function(app) {
     res.render("newprojects");
   });
 
+  app.get("/aboutus", function(req, res) {
+    res.render("about");
+  });
+
   app.post("/projects", function(req, res) {
     var newProject = {};
     newProject.name = req.body.name;
