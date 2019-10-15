@@ -44,7 +44,17 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- modal alert -->
+    <div id="modal1" class="modal">
+        <div class="modal-content red-text">
+            <h4>User Name or Password is wrong!</h4>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
  <script>
  $(document).ready(function() {
   // Getting references to our form and inputs
@@ -77,9 +87,22 @@
         window.location.replace("/dashboard");
       })
       .catch(function(err) {
-        console.log(err);
+        show_modal("modal1");
+        setTimeout(function () { hide_modal("modal1"); }, 3000);
       });
   }
+
+
+  function show_modal(modalID) {
+    $('#' + modalID).modal();
+    $('#' + modalID).modal('open');
+}
+
+
+function hide_modal(modalID) {
+    $('#' + modalID).modal('close');
+}
+
 });
 
 </script>
