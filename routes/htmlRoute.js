@@ -1,22 +1,33 @@
 //var db = require("../models");
 
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+
 module.exports = function(app) {
   app.get("/", function(req, res) {
     res.render("index");
-    //res.send("This is index page!");
   });
 
-  app.get("/dashboard", function(req, res) {
-    res.render("dashboard");
-    // res.send("This is dashboard page!");
+  app.get("/dashboard", isAuthenticated, function(req, res) {
+    db.Project.findAll({}).then(function(data) {
+      res.render("dashboard", { username: req.user.userName, projects: data });
+    });
   });
 
-  // app.get("/projectsview", function(req, res) {
-  //   db.Project.findAll({}).then(function(data) {
-  //     // res.render("projectsview", data)
-  //     res.send("This is projects view page!" + data);
-  //   });
-  // });
+  app.get("/signup", function(req, res) {
+    // If the user already has logged in, send them to the dashboard page
+    if (req.user) {
+      res.redirect("/dashboard");
+    }
+    res.render("signup");
+  });
+
+  app.get("/login", function(req, res) {
+    // If the user already has logged in, send them to the dashboard page
+    if (req.user) {
+      res.redirect("/dashboard");
+    }
+    res.render("login");
+  });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {

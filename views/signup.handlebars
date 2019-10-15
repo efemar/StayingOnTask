@@ -1,0 +1,82 @@
+<main>
+    <div id="dashboard" class="thirdPage ">
+        <!-- Navigation bar -->
+        <nav class=" navigation">
+            <div class="container">
+                <div class="nav-wrapper ">
+
+                    <!-- Navigation Links -->
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href=" " class="topNavHome">Home</a></li>
+                        <li><a href=" " class="topNavSearch">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <br>
+    <br>
+
+    <div class="container">
+            <form class="signup">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="user-name" name="userName" type="text">
+                        <label for="user-name">User Name</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="password">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+
+                <a class="bigButtons waves-effect waves-light btn-large" id="signup-btn">Sign Up</a>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+    <script>
+
+$(document).ready(function() {
+  // Getting references to our form and input
+  var usernameInput = $("input#user-name");
+  var passwordInput = $("input#password");
+
+  $("#signup-btn").on("click", function(event) {
+
+    event.preventDefault();
+
+    var userData = {
+      userName: usernameInput.val().trim(),
+      password: passwordInput.val().trim()
+    };
+
+    if (!userData.userName || !userData.password) {
+      return;
+    }
+   
+    signUpUser(userData);
+    usernameInput.val("");
+    passwordInput.val("");
+  });
+
+  
+  function signUpUser(userObj) {
+    $.post("/api/signup", userObj)
+      .then(function(data) {
+          console.log(data)
+        window.location.replace("/dashboard");
+      })
+  }
+
+});
+
+
+
+    </script>
