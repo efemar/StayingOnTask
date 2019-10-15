@@ -1,5 +1,3 @@
-var db = require("../models");
-
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
@@ -21,12 +19,6 @@ module.exports = function(app) {
       res.redirect("/dashboard");
     }
     res.render("login");
-  });
-
-  app.get("/dashboard", isAuthenticated, function(req, res) {
-    db.Project.findAll({}).then(function(data) {
-      res.render("dashboard", { username: req.user.userName, projects: data });
-    });
   });
 
   app.get("/newprojects", isAuthenticated, function(req, res) {

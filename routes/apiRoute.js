@@ -1,6 +1,7 @@
 var db = require("../models");
 var moment = require("moment");
 var passport = require("../config/passport");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
@@ -23,10 +24,23 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  app.get("/projects", function(req, res) {
+  // app.get("/dashboard", isAuthenticated, function(req, res) {
+  //   db.Project.findAll({}).then(function(data) {
+  //     res.render("dashboard", { username: req.user.userName, projects: data });
+  //   });
+  // });
+
+  app.get("/dashboard", isAuthenticated, function(req, res) {
+    db.Project.findAll({}).then(function() {
+      res.render("dashboard", { username: req.user.userName });
+    });
+  });
+
+  app.get("/projects", isAuthenticated, function(req, res) {
     db.Project.findAll({
       where: { UserId: req.user.id },
-      order: [["projectDate", "ASC"]]
+      order: [["projectDate", "ASC"]],
+      include: db.Task
     }).then(function(result) {
       var projectArray = [];
 
@@ -37,12 +51,39 @@ module.exports = function(app) {
           result[i].dataValues.projectDate,
           "YYYY-MM-DD"
         ).format("MM/DD/YYYY");
+        projectObj.totalTasks = result[i].dataValues.Tasks.length;
+        projectObj.completedTasks = result[i].dataValues.Tasks.filter(function(
+          item
+        ) {
+          return item.complete === true;
+        }).length;
         projectArray.push(projectObj);
       }
 
       res.json(projectArray);
     });
   });
+
+  // app.get("/projects", function (req, res) {
+  //   db.Project.findAll({
+  //     where: { UserId: req.user.id },
+  //     order: [["projectDate", "ASC"]],
+  //     include: db.Task
+  //   }).then(function (result) {
+  //     var projectArray = [];
+
+  //     for (var i = 0; i < result.length; i++) {
+  //       var projectObj = {};
+  //       projectObj.name = result[i].dataValues.name;
+  //       projectObj.projectDate = moment(result[i].dataValues.projectDate, "YYYY-MM-DD").format("MM/DD/YYYY");
+  //       projectObj.totalTasks = result[i].dataValues.Tasks.length;
+  //       projectObj.completedTasks = result[i].dataValues.Tasks.filter(item => item.complete === true).length;
+  //       projectArray.push(projectObj);
+  //     }
+
+  //     res.json(projectArray);
+  //   });
+  // });
 
   app.post("/projects", function(req, res) {
     console.log("request body: ", req.body);

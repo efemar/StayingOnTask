@@ -30,33 +30,23 @@
                 <table class="striped centered">
                     <thead>
                         <tr class="tabs">
-                            <th class="tab col s4"><a class="active" href="#test1">Project Name</a></th>
-                            <th class="tab col s4"><a class="active" href="#test2"># of Completed Tasks</a></th>
-                            <th class="tab col s4"><a class="active" href="#test4">Complete By</a></th>
+                            <th class="tab col s3 l3"><a class="active" href="#test1">Project Name</a></th>
+                            <th class="tab col s3 l3"><a class="active" href="#test2"># of Completed Tasks</a></th>
+                            <th class="tab col s3 l3"><a class="active" href="#test4">Complete By</a></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr class="tabs" id="emptyProjects">
+                        <tr class="tabs s3 l3" id="emptyProjects">
                             <td class="tab col s12 text-align">You don't currently have any projects</td>
                         </tr>
-
+                        {{!-- 
                         <tr class="tabs">
                             <td class="tab col s4">Tyler's birthday</td>
                             <td class="tab col s4">4 (/10)</td>
                             <td class="tab col s4">06/22/2020</td>
 
-                        </tr>
-                        <tr class="tabs">
-                            <td class="tab col s4">Alice's birthday</td>
-                            <td class="tab col s4">5 (/10)</td>
-                            <td class="tab col s4">03/19/2019</td>
-                        </tr>
-                        <tr class="tabs">
-                            <td class="tab col s4">Alvin's birthday</td>
-                            <td class="tab col s4">7 (/10)</td>
-                            <td class="tab col s4">11/22/2019</td>
-                        </tr>
+                        </tr>--}}
             </div>
             </tbody>
             </table>
@@ -71,21 +61,33 @@
     $(document).ready(function () {
         $.get("/projects", function (data) {
             console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                var trEle = $("<tr>");
-                trEle.addClass("tabs");
-                var tdName = $("<td>");
-                tdName.addClass("tab col s4");
-                tdName.text(data[i].name);
-                var tdTask = $("<td>");
-                tdTask.addClass("tab col s4");
-                tdTask.text("0 (/20)");
-                var tdDate = $("<td>");
-                tdDate.addClass("tab col s4");
-                tdDate.text(data[i].projectDate);
-                trEle.append(tdName, tdTask, tdDate);
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    var trEle = $("<tr>");
+                    trEle.addClass("tabs");
+                    var tdName = $("<td>");
+                    tdName.addClass("tab col s3 l3");
+                    tdName.text(data[i].name);
+                    var tdTask = $("<td>");
+                    tdTask.addClass("tab col s3 l3");
+                    tdTask.text(data[i].completedTasks + " (/" + data[i].totalTasks + ")");
+                    var tdDate = $("<td>");
+                    tdDate.addClass("tab col s3 l3");
+                    tdDate.text(data[i].projectDate);
+                    var tdDelete = $("<td>");
+                    tdDelete.addClass("tab col s3 l3");
+                    var button = $("<button>");
+                    button.addClass("delete-task-btn waves-effect waves-light btn btn-small red");
+                    button.text("DELETE");
+                    tdDelete.append(button);
 
-                $("tbody").append(trEle);
+                    trEle.append(tdName, tdTask, tdDate, tdDelete);
+
+                    $("tbody").append(trEle);
+                }
+            }
+            else {
+                $("#emptyProjects").css("display", "block");
             }
         });
     });
