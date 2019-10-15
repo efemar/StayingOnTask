@@ -1,3 +1,33 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin: 0 0 100px; /* bottom = footer height */
+}
+.page-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+}
+
+#homePage {
+  height: auto;
+  background-image: url(../images/road-220058_1280.jpg);
+  background-repeat: no-repeat, repeat;
+  background-size: inherit;
+
+/* @media only screen and (max-width: 941px) {
+  .firstPage {
+    height: auto;
+    background-image: url(../images/road-220058_1280.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: inherit;
+    /* background-size:; */
+  } */
