@@ -59,7 +59,6 @@ module.exports = function(app) {
     });
   });
 
- 
   app.post("/projects", function(req, res) {
     console.log("request body: ", req.body);
     console.log("request user: ", req.user);
@@ -81,10 +80,14 @@ module.exports = function(app) {
   });
 
   app.delete("/projects/:id", function(req, res) {
-    db.Task.destroy({ where: { ProjectId: req.params.id } }).then(function(results) {
+    db.Task.destroy({
+      where: { ProjectId: req.params.id }
+    }).then(function() {
       // results is the number of task records deleted
-      db.Project.destroy({ where: { id: req.params.id } }).then(function(result) {
-        console.log(result)
+      db.Project.destroy({ where: { id: req.params.id } }).then(function(
+        result
+      ) {
+        console.log(result);
         // result is number 1
         res.json(result);
       });
