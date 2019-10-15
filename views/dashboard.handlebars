@@ -20,7 +20,7 @@
     <br>
     <div class="container">
         <div class="col l12 center">
-            <a class="bigButtons waves-effect waves-light btn-large " href="/projects"><i
+            <a class="bigButtons waves-effect waves-light btn-large " href="/newprojects"><i
                     class="material-icons right">expand_more</i> <span id="add-project">Add a Project</span></a>
         </div>
         <br>
@@ -31,7 +31,7 @@
                     <thead>
                         <tr class="tabs">
                             <th class="tab col s4"><a class="active" href="#test1">Project Name</a></th>
-                            <th class="tab col s4"><a class="active" href="#test2"># of Tasks</a></th>
+                            <th class="tab col s4"><a class="active" href="#test2"># of Completed Tasks</a></th>
                             <th class="tab col s4"><a class="active" href="#test4">Complete By</a></th>
                         </tr>
                     </thead>
@@ -66,9 +66,30 @@
 </main>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- our javascript -->
-{{!-- <script src="../public/js/index.js"></script> --}}
-<script type="text/javascript" src="../public/js/materialize.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.get("/projects", function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                var trEle = $("<tr>");
+                trEle.addClass("tabs");
+                var tdName = $("<td>");
+                tdName.addClass("tab col s4");
+                tdName.text(data[i].name);
+                var tdTask = $("<td>");
+                tdTask.addClass("tab col s4");
+                tdTask.text("0 (/20)");
+                var tdDate = $("<td>");
+                tdDate.addClass("tab col s4");
+                tdDate.text(data[i].projectDate);
+                trEle.append(tdName, tdTask, tdDate);
+
+                $("tbody").append(trEle);
+            }
+        });
+    });
+</script>
 
 <style>
     #emptyProjects {

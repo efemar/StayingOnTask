@@ -7,12 +7,6 @@ module.exports = function(app) {
     res.render("index");
   });
 
-  app.get("/dashboard", isAuthenticated, function(req, res) {
-    db.Project.findAll({}).then(function(data) {
-      res.render("dashboard", { username: req.user.userName, projects: data });
-    });
-  });
-
   app.get("/signup", function(req, res) {
     // If the user already has logged in, send them to the dashboard page
     if (req.user) {
@@ -27,6 +21,20 @@ module.exports = function(app) {
       res.redirect("/dashboard");
     }
     res.render("login");
+  });
+
+  app.get("/dashboard", isAuthenticated, function(req, res) {
+    db.Project.findAll({}).then(function(data) {
+      res.render("dashboard", { username: req.user.userName, projects: data });
+    });
+  });
+
+  app.get("/newprojects", isAuthenticated, function(req, res) {
+    res.render("newprojects", { username: req.user.userName });
+  });
+
+  app.get("/aboutus", function(req, res) {
+    res.render("about");
   });
 
   // Render 404 page for any unmatched routes

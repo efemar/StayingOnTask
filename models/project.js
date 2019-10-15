@@ -13,13 +13,6 @@ module.exports = function(sequelize, DataTypes) {
     projectDate: {
       type: DataTypes.DATEONLY,
       allowNull: false
-    },
-    creatorName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
     }
   });
 
