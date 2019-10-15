@@ -23,35 +23,44 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  app.get("/newprojects", function(req, res) {
-    res.render("newprojects");
-  });
+  app.get("/projects", function(req, res) {
+    db.Project.findAll({
+      where: { UserId: req.user.id },
+      order: [["projectDate", "ASC"]]
+    }).then(function(result) {
+      var projectArray = [];
 
-  app.get("/aboutus", function(req, res) {
-    res.render("about");
+      for (var i = 0; i < result.length; i++) {
+        var projectObj = {};
+        projectObj.name = result[i].dataValues.name;
+        projectObj.projectDate = moment(
+          result[i].dataValues.projectDate,
+          "YYYY-MM-DD"
+        ).format("MM/DD/YYYY");
+        projectArray.push(projectObj);
+      }
+
+      res.json(projectArray);
+    });
   });
 
   app.post("/projects", function(req, res) {
+    console.log("request body: ", req.body);
+    console.log("request user: ", req.user);
     var newProject = {};
     newProject.name = req.body.name;
     newProject.description = req.body.description;
     newProject.projectDate = moment(req.body.projectDate, "MM/DD/YYYY");
-    newProject.creatorName = req.body.creatorName;
+    newProject.UserId = req.user.id;
     newProject.ProjectTypeId = req.body.ProjectTypeId;
 
     db.Project.create(newProject).then(function(result) {
-      /* result will be like below:
-      {"id":1,"name":"Sunny's birthday Party","description":"a nice small party for Sunny",
-      "projectDate":"2019-12-12","creatorName":"Elisa","ProjectTypeId":"1",
-      "updatedAt":"2019-10-12T00:52:36.141Z","createdAt":"2019-10-12T00:52:36.141Z"}
-      Also got an error on terminal about moment.js regarding project date
-      */
       var projectTypeId = result.ProjectTypeId;
       var projectId = result.id;
 
       addTemplateTaskToProject(projectTypeId, projectId);
 
-      res.json(result);
+      res.redirect("/dashboard");
     });
   });
 

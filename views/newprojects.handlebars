@@ -4,12 +4,12 @@
         <nav class=" navigation">
             <div class="container">
                 <div class="nav-wrapper ">
-
                     <!-- Navigation Links -->
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href=" " class="topNavHome">User Name</a></li>
-                        <li><a href=" " class="topNavSearch">Log Out</a></li>
+                        <li>Hello, {{ username }}</li>
+                        <li><a href="/dashboard" class="topNavSearch">Dashboard</a></li>
+                        <li><a href="/logout" class="topNavSearch">Log Out</a></li>
                     </ul>
                 </div>
             </div>
@@ -17,54 +17,57 @@
     </div>
     <br>
     <br>
-
     <div class="container">
         <div class="row">
-            <form class="col s12">
+            <form class="col s12" action="/projects" method="post">
                 <div class="row">
-                    <div class="col s12">
-                        <div class="input-field row">
-                            <input value="Project Name" placeholder="Project Name" id="creator-name" type="text">
-                            <label for="creator-name">Project Name</label>
-                        </div>
+                    <div class="input-field col s12">
+                        <label for="creator-name">Project(Event) Name</label>
+                        <input id="creator-name" placeholder="Project(Event) Name" name="name" type="text">
+
                     </div>
                 </div>
-                <!-- Dropdown Trigger -->
-                <div class="col s12">
-                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Project(Event) Type</a>
-                    <!-- Dropdown Structure -->
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li><a href="#!">Birthday</a></li>
-                    </ul>
-                </div>
-                <div class="input-field row">
-                    <div class="col s12">
-                        <input id="new-date" placeholder="MM/DD/YYYY" type="text" class="validate">
+              <div class="row">
+                    <div class="input-field col s12">
                         <label for="new-date">Project(Event) Date</label>
+                        <input id="new-date" placeholder="MM/DD/YYYY" name="projectDate" type="text">
                     </div>
-                </div>
-                <div class="row">
+               </div>
+          <div class="row">
                     <div class="input-field col s12">
-                        <input value="Description" id="description" type="text" class="validate">
                         <label for="description">Description</label>
-                    </div>
-                </div>
+                        <input id="description" placeholder="Description" name="description" type="text">
 
+                    </div>
+             </div>
+                <!-- Select Project(Event) Type -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="creator-name" type="text" class="validate">
-                        <label for="creator-name">Project Creator</label>
+                        <select name="ProjectTypeId">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Birthday</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>Project(Event) Type</label>
                     </div>
-                </div>
-
-                <a class="bigButtons waves-effect waves-light btn-large " href="/login"><i
-                        class="material-icons right">expand_more</i> <span id="submitBtn">Submit</span></a>
+               </div>
+                <br><br>
+                 <button class="btn waves-effect waves-light" type="submit">Submit
+    <i class="material-icons right">send</i>
+  </button>
             </form>
         </div>
     </div>
-    </main>
+</main>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- our javascript -->
-    {{!-- <script src="../public/js/index.js"></script> --}}
-    <script type="text/javascript" src="../public/js/materialize.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('select').formSelect();
+    });
+</script>
