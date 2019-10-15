@@ -1,0 +1,85 @@
+<main>
+    <div id="dashboard" class="thirdPage ">
+        <!-- Navigation bar -->
+        <nav class=" navigation">
+            <div class="container">
+                <div class="nav-wrapper ">
+
+                    <!-- Navigation Links -->
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="/" class="topNavHome">Home</a></li>
+                        <li><a href=" " class="topNavSearch">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <br>
+    <br>
+
+    <div class="container">
+            <form class="login">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="user-name" name="userName" type="text">
+                        <label for="user-name">User Name</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="password">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+
+  <button class="btn waves-effect waves-light" type="submit" name="action">Login
+    <i class="material-icons right">send</i>
+  </button>
+
+            </form>
+              <br />
+        <p>No account yet! Sign up <a href="/signup">here</a></p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script>
+ $(document).ready(function() {
+  // Getting references to our form and inputs
+  var loginForm = $("form.login");
+  var usernameInput = $("input#user-name");
+  var passwordInput = $("input#password");
+
+  // When the form is submitted, we validate there's an username and password entered
+  loginForm.on("submit", function(event) {
+    event.preventDefault();
+    var userData = {
+      userName: usernameInput.val().trim(),
+      password: passwordInput.val().trim()
+    };
+
+    if (!userData.userName || !userData.password) {
+      return;
+    }
+    
+    // If we have an username and password we run the loginUser function and clear the form
+    loginUser(userData);
+    usernameInput.val("");
+    passwordInput.val("");
+  });
+
+  // loginUser does a post to our "api/login" route and if successful, redirects us the the dashboard page
+  function loginUser(userObj) {
+    $.post("/api/login", userObj)
+      .then(function() {
+        window.location.replace("/dashboard");
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
+});
+
+</script>
