@@ -24,12 +24,6 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  // app.get("/dashboard", isAuthenticated, function(req, res) {
-  //   db.Project.findAll({}).then(function(data) {
-  //     res.render("dashboard", { username: req.user.userName, projects: data });
-  //   });
-  // });
-
   app.get("/dashboard", isAuthenticated, function(req, res) {
     db.Project.findAll({}).then(function() {
       res.render("dashboard", { username: req.user.userName });
@@ -46,6 +40,7 @@ module.exports = function(app) {
 
       for (var i = 0; i < result.length; i++) {
         var projectObj = {};
+        projectObj.id = result[i].dataValues.id;
         projectObj.name = result[i].dataValues.name;
         projectObj.projectDate = moment(
           result[i].dataValues.projectDate,
@@ -64,27 +59,7 @@ module.exports = function(app) {
     });
   });
 
-  // app.get("/projects", function (req, res) {
-  //   db.Project.findAll({
-  //     where: { UserId: req.user.id },
-  //     order: [["projectDate", "ASC"]],
-  //     include: db.Task
-  //   }).then(function (result) {
-  //     var projectArray = [];
-
-  //     for (var i = 0; i < result.length; i++) {
-  //       var projectObj = {};
-  //       projectObj.name = result[i].dataValues.name;
-  //       projectObj.projectDate = moment(result[i].dataValues.projectDate, "YYYY-MM-DD").format("MM/DD/YYYY");
-  //       projectObj.totalTasks = result[i].dataValues.Tasks.length;
-  //       projectObj.completedTasks = result[i].dataValues.Tasks.filter(item => item.complete === true).length;
-  //       projectArray.push(projectObj);
-  //     }
-
-  //     res.json(projectArray);
-  //   });
-  // });
-
+ 
   app.post("/projects", function(req, res) {
     console.log("request body: ", req.body);
     console.log("request user: ", req.user);
@@ -106,9 +81,13 @@ module.exports = function(app) {
   });
 
   app.delete("/projects/:id", function(req, res) {
-    db.Project.destroy({ where: { id: req.params.id } }).then(function(result) {
-      res.json(result);
-      // result is number 1
+    db.Task.destroy({ where: { ProjectId: req.params.id } }).then(function(results) {
+      // results is the number of task records deleted
+      db.Project.destroy({ where: { id: req.params.id } }).then(function(result) {
+        console.log(result)
+        // result is number 1
+        res.json(result);
+      });
     });
   });
 

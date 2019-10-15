@@ -77,7 +77,8 @@
                     var tdDelete = $("<td>");
                     tdDelete.addClass("tab col s3 l3");
                     var button = $("<button>");
-                    button.addClass("delete-task-btn waves-effect waves-light btn btn-small red");
+                    button.addClass("delete-project-btn waves-effect waves-light btn btn-small red");
+                    button.attr("data-projectid", data[i].id);
                     button.text("DELETE");
                     tdDelete.append(button);
 
@@ -90,6 +91,21 @@
                 $("#emptyProjects").css("display", "block");
             }
         });
+
+
+        $(document).on("click", ".delete-project-btn", function () {
+            var projectId = $(this).attr("data-projectid");
+            console.log(projectId);
+
+            $.ajax({
+                method: "DELETE",
+                url: "/projects/" + projectId
+            })
+                .then(function () {
+                     window.location.href = "/dashboard";
+                });
+        })
+
     });
 </script>
 
