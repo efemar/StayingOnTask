@@ -1,39 +1,38 @@
 <!-- first page -->
 <main>
-    <div id="homePage" class="firstPage ">
+    <div id="homePage" class="firstPage">
         <!-- Navigation bar -->
-        <nav class=" navigation">
+        <nav class="navigation ">
             <div class="container">
-                <div class="nav-wrapper ">
+                <div class="nav-wrapper">
 
                     <!-- Navigation Links -->
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a href=" " class="topNavHome">Home</a></li>
                         <li><a href="/login" class="topNavSearch">Login</a></li>
-                        <li><a href=" " class="topNavContact">About Us</a></li>
+                        <li><a href="/aboutUs" class="topNavContact">About Us</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div id="road">
             <!-- section with slogan -->
             <section class="main-section">
                 <div class="row">
-                    <div class="col l8 m9 s12">
+                    <div class="col l12 m12 s12 ">
                         <div class="centerText">
-                            <h1 class="welcome">Stay on Task</h1>
-                            <h3 class="onePatient">a roadmap to completion</h3>
+                            <h1 class="welcome">StayingOnTask</h1>
+                            <h3 class="road">A roadmap to completing your projects</h3>
                             <a class="bigButtons waves-effect waves-light btn-large " href="/login"><i
-                                    class="material-icons right">expand_more</i> <span id="project">Get
-                                    Started</span></a>
+                                    class="material-icons right">expand_more</i> <span id="project">Show Me The Road</span></a>
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-        </section>
     </div>
-    
+
 
 </main>
 
@@ -41,3 +40,13 @@
 <!-- our javascript -->
 {{!-- <script src="../public/js/index.js"></script> --}}
 <script type="text/javascript" src="../public/js/materialize.js"></script>
+
+<style>
+    #road {
+        text-align: center;
+    }
+
+    .centerText {
+        margin-top: 100px;
+    }
+</style>
