@@ -1,147 +1,61 @@
 <main>
-        <div id="tasks" class="Third Page ">
-            <!-- Navigation bar -->
-            <nav class=" navigation">
-                <div class="container">
-                    <div class="nav-wrapper ">
-                        <!-- Navigation Links -->
-                        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                        <ul id="nav-mobile" class="right hide-on-med-and-down">
-                            <li>Hello, {{ username }}</li>
-                            <li><a href="/logout" class="topNavSearch">Log Out</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- start tabs -->
-            <div class="row">
-                <div class="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s2"><a href="#all-tab">All Tasks</a></li>
-                        <li class="tab col s2"><a href="#prep-tab">Preparation</a></li>
-                        <li class="tab col s2"><a href="#comm-tab">Communications</a></li>
-                        <li class="tab col s2"><a href="#reserve-tab">Reservations</a></li>
-                        <li class="tab col s2"><a href="#supply-tab">Supplies</a></li>
-                        <li class="tab col s2"><a href="#finance-tab">Financial</a></li>
+    <div id="tasks" class="Third Page ">
+
+        <!-- Navigation bar -->
+        <nav class=" navigation">
+            <div class="container">
+                <div class="nav-wrapper ">
+                    <!-- Navigation Links -->
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>Hello, {{ username }}</li>
+                        <li><a href="/logout" class="topNavSearch">Log Out</a></li>
                     </ul>
                 </div>
-                <div id="all-tab" class="col s12">
-                    <div class="container task-container">
-    
-                        <!-- LIST OF TASKS -->
-                        <br>
-                        <br>
-                        <div class="row">
-                            <div class="col s12">
-                                <table class="centered">
-                                    <tr class="tabs" id="form-tab">
-                                        <form>
-                                            <td class="tab col s3 l2"><input placeholder="New Task Item"
-                                                    id="new-task-description" type="text" class="validate"></td>
-                                            <td class="tab col s3 l2 input-field">
-                                                <select class="browser-default" name="CategoryTaskTypeId">
-                                                    <label>Task Category</label>
-                                                    <option value="" disabled selected>Choose your option</option>
-                                                    <option value="1">Birthday</option>
-                                                    <option value="2">Option 2</option>
-                                                    <option value="3">Option 3</option>
-                                                </select>
-                                            </td>
-                                            <td class="tab col s3 l2"><input placeholder="MM/DD/YYYY"
-                                                    id="new-task-complete-by" type="date" class="validate"></td>
-                                            <td class="tab col s3 l2"><button
-                                                    class="delete-task-btn waves-effect waves-light btn btn-small green disabled">COMPLETE
-                                                    ME</button></td>
-                                            <td class="tab col s3 l2"><button
-                                                    class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
-                                                    type="submit">SUBMIT</button>
-                                            </td>
-                                        </form>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col s12">
-    
-                                <table class="new striped centered">
-                                    <thead>
-                                        <!-- need to set js to filter these by the appropriate category -->
-                                        <tr class="tabs">
-                                    <th class="tab col s3 l2"><a class="active" href=".task-table">Task</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".category-table">Category</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".updated-on-table">Complete
-                                            By:
-                                            MM/DD/YYYY</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".complete-table">Completed</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".delete-table">DELETE
-                                            TASK</a></th>
-                                    {{!-- <th class="tab col s3 l2"><a class="active" href=".update-table">UPDATE
-                                            TASK</a></th> --}}
-    
-                                </tr>
-                            </thead>
-                            <tr class="tabs">
-                                <td class="tab col s2 l2">Pick a Theme</td>
-                                <td class="tab col s2 l2">Preparation</td>
-                                <td class="tab col s2 l2">06/22/2020</td>
-                                <td class="tab col s2 l2"><button
-                                        class="delete-task-btn waves-effect waves-light btn btn-small green">COMPLETE
-                                        ME</button></td>
-                                <td class="tab col s l2"><button
-                                        class="delete-task-btn waves-effect waves-light btn btn-small red">DELETE</button>
-                                </td>
-                                {{!-- <td class="tab col s2 l2"><button class="update-task-btn waves-effect waves-light btn btn-small blue">UPDATE</button>
-                                </td> --}}
-    
-                            </tr>
-                                    <tbody>
-                                        <!-- need to use above ID"s as classes to pull for each in handlbars to dynamically create each task in list -->
-                            </div>
-                            </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div id="prep-tab" class="col s12">
+        </nav>
+
+        <div class="row">
+
+            <div id="all-tab" class="col s12">
                 <div class="container task-container">
-    
+
                     <!-- LIST OF TASKS -->
                     <br>
                     <br>
-                    <!-- all preparation category task items will render here when clicked -->
                     <div class="row">
                         <div class="col s12">
                             <table class="centered">
                                 <tr class="tabs" id="form-tab">
                                     <form>
-                                        <td class="tab col s3 l2"><input placeholder="New Task Item"
-                                                id="new-task-description" type="text" class="validate"></td>
-                                        {{!-- <td class="tab col s3 l2 input-field">
-                                            <select class="browser-default" name="CategoryTaskTypeId">
-                                                <label>Task Category</label>
-                                                <option value="" disabled selected>Choose your option</option>
-                                                <option value="1">Birthday</option>
-                                                <option value="2">Option 2</option>
-                                                <option value="3">Option 3</option>
+                                        <td class="tab col s3 l2"><input id="description" id="new-task-description"
+                                                type="text"></td>
+
+                                        <td class="tab col s3 l2 input-field">
+                                            <select class="browser-default" id="CategoryTypeId">
+                                                <option value="" disabled selected>Choose Task Category</option>
+                                                <option value="1">Preparation</option>
+                                                <option value="2">Communication</option>
+                                                <option value="3">Reservation</option>
+                                                <option value="4">Supplies</option>
+                                                <option value="5">Financial</option>
                                             </select>
-                                        </td> --}}
-                                        <td class="tab col s3 l2"><input placeholder="MM/DD/YYYY" id="new-task-complete-by"
-                                                type="date" class="validate"></td>
-                                        {{!-- <td class="tab col s3 l2"><button
-                                                class="delete-task-btn waves-effect waves-light btn btn-small green disabled">COMPLETE
-                                                ME</button></td> --}}
+                                        </td>
+
+                                        <td class="tab col s3 l2"><input id="completeByDate" placeholder="MM/DD/YYYY"
+                                                id="new-task-complete-by" type="date"></td>
+
                                         <td class="tab col s3 l2"><button
                                                 class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
-                                                type="submit">SUBMIT</button>
+                                                type="submit">Add Task</button>
                                         </td>
                                     </form>
                                 </tr>
                             </table>
                         </div>
+
                         <div class="col s12">
-    
+
                             <table class="new striped centered">
                                 <thead>
                                     <!-- need to set js to filter these by the appropriate category -->
@@ -156,402 +70,152 @@
                                         </th>
                                         <th class="tab col s3 l2"><a class="active" href=".delete-table">DELETE
                                                 TASK</a></th>
-                                        {{!-- <th class="tab col s3 l2"><a class="active" href=".update-table">UPDATE
-                                                TASK</a></th> --}}
-                                    
+
                                     </tr>
-                                    </thead>
-                                    <tr class="tabs">
-                                        <td class="tab col s2 l2">Pick a Theme</td>
-                                        <td class="tab col s2 l2">Preparation</td>
-                                        <td class="tab col s2 l2">06/22/2020</td>
-                                        <td class="tab col s2 l2"><button class="delete-task-btn waves-effect waves-light btn btn-small green">COMPLETE
-                                                ME</button></td>
-                                        <td class="tab col s l2"><button class="delete-task-btn waves-effect waves-light btn btn-small red">DELETE</button>
-                                        </td>
-                                        {{!-- <td class="tab col s2 l2"><button
-                                                class="update-task-btn waves-effect waves-light btn btn-small blue">UPDATE</button>
-                                        </td> --}}
-                                    
-                                    </tr>
+                                </thead>
+
                                 <tbody>
-                                    <!-- need to use above ID"s as classes to pull for each in handlbars to dynamically create each task in list -->
+                                    {{#each tasks}}
+
+                                    <tr class="tabs">
+                                        <td class="tab col s2 l2">{{ task }}</td>
+                                        <td class="tab col s2 l2"> {{ category }}</td>
+                                        <td class="tab col s2 l2">{{ date}}</td>
+
+
+                                        <td class="tab col s2 l2">
+
+                                            {{#if completed}}<button
+                                                class="uncomplete-task-btn waves-effect waves-light btn btn-small yellow"
+                                                data-id="{{id}}">Uncomplete</button>
+
+                                            {{else}}<button
+                                                class="complete-task-btn waves-effect waves-light btn btn-small green"
+                                                data-id="{{id}}">Complete</button>{{/if}}
+
+                                        </td>
+                                        <td class="tab col s l2"><button
+                                                class="delete-task-btn waves-effect waves-light btn btn-small red"
+                                                data-id="{{id}}">DELETE</button>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+
+                                </tbody>
+
+                            </table>
+
                         </div>
-                        </tbody>
-                        </table>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
-        <div id="comm-tab" class="col s12">
-            <!-- all communications category task items will render here when clicked -->
-            <div class="container task-container">
-    
-                <!-- LIST OF TASKS -->
-                <br>
-                <br>
-                <div class="row">
-                    <div class="col s12">
-                        <table class="centered">
-                            <tr class="tabs" id="form-tab">
-                                <form>
-                                    <td class="tab col s3 l2"><input placeholder="New Task Item" id="new-task-description"
-                                            type="text" class="validate"></td>
-                                    {{!-- <td class="tab col s3 l2 input-field">
-                                        <select class="browser-default" name="CategoryTaskTypeId">
-                                            <label>Task Category</label>
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <option value="1">Birthday</option>
-                                            <option value="2">Option 2</option>
-                                            <option value="3">Option 3</option>
-                                        </select>
-                                    </td> --}}
-                                    <td class="tab col s3 l2"><input placeholder="MM/DD/YYYY" id="new-task-complete-by"
-                                            type="date" class="validate"></td>
-                                    {{!-- <td class="tab col s3 l2"><button
-                                            class="delete-task-btn waves-effect waves-light btn btn-small green disabled">COMPLETE
-                                            ME</button></td> --}}
-                                    <td class="tab col s3 l2"><button
-                                            class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
-                                            type="submit">SUBMIT</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col s12">
-    
-                        <table class="new striped centered">
-                            <thead>
-                                <!-- need to set js to filter these by the appropriate category -->
-                                <tr class="tabs">
-                                    <th class="tab col s3 l2"><a class="active" href=".task-table">Task</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".category-table">Category</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".updated-on-table">Complete
-                                            By:
-                                            MM/DD/YYYY</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".complete-table">Completed</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".delete-table">DELETE
-                                            TASK</a></th>
-                                    {{!-- <th class="tab col s3 l2"><a class="active" href=".update-table">UPDATE
-                                            TASK</a></th>
-                                 --}}
-                                </tr>
-                                </thead>
-                                <tr class="tabs">
-                                    <td class="tab col s2 l2">Pick a Theme</td>
-                                    <td class="tab col s2 l2">Preparation</td>
-                                    <td class="tab col s2 l2">06/22/2020</td>
-                                    <td class="tab col s2 l2"><button class="delete-task-btn waves-effect waves-light btn btn-small green">COMPLETE
-                                            ME</button></td>
-                                    <td class="tab col s l2"><button class="delete-task-btn waves-effect waves-light btn btn-small red">DELETE</button>
-                                    </td>
-                                    {{!-- <td class="tab col s2 l2"><button
-                                            class="update-task-btn waves-effect waves-light btn btn-small blue">UPDATE</button>
-                                    </td> --}}
-                                
-                                </tr>
-                            <tbody>
-                                <!-- need to use above ID"s as classes to pull for each in handlbars to dynamically create each task in list -->
-                    </div>
-                    </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div id="reserve-tab" class="col s12">
-            <!-- all reservation category task items will render here when clicked -->
-            <div class="container task-container">
-    
-                <!-- LIST OF TASKS -->
-                <br>
-                <br>
-                <div class="row">
-                    <div class="col s12">
-                        <table class="centered">
-                            <tr class="tabs" id="form-tab">
-                                <form>
-                                    <td class="tab col s3 l2"><input placeholder="New Task Item" id="new-task-description"
-                                            type="text" class="validate"></td>
-                                    {{!-- <td class="tab col s3 l2 input-field">
-                                        <select class="browser-default" name="CategoryTaskTypeId">
-                                            <label>Task Category</label>
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <option value="1">Birthday</option>
-                                            <option value="2">Option 2</option>
-                                            <option value="3">Option 3</option>
-                                        </select>
-                                    </td> --}}
-                                    <td class="tab col s3 l2"><input placeholder="MM/DD/YYYY" id="new-task-complete-by"
-                                            type="date" class="validate"></td>
-                                    {{!-- <td class="tab col s3 l2"><button
-                                            class="delete-task-btn waves-effect waves-light btn btn-small green disabled">COMPLETE
-                                            ME</button></td> --}}
-                                    <td class="tab col s3 l2"><button
-                                            class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
-                                            type="submit">SUBMIT</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col s12">
-    
-                        <table class="new striped centered">
-                            <thead>
-                                <!-- need to set js to filter these by the appropriate category -->
-                                <tr class="tabs">
-                                    <th class="tab col s3 l2"><a class="active" href=".task-table">Task</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".category-table">Category</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".updated-on-table">Complete
-                                            By:
-                                            MM/DD/YYYY</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".complete-table">Completed</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".delete-table">DELETE
-                                            TASK</a></th>
-                                    {{!-- <th class="tab col s3 l2"><a class="active" href=".update-table">UPDATE
-                                            TASK</a></th> --}}
-                                
-                                </tr>
-                                </thead>
-                                <tr class="tabs">
-                                    <td class="tab col s2 l2">Pick a Theme</td>
-                                    <td class="tab col s2 l2">Preparation</td>
-                                    <td class="tab col s2 l2">06/22/2020</td>
-                                    <td class="tab col s2 l2"><button class="delete-task-btn waves-effect waves-light btn btn-small green">COMPLETE
-                                            ME</button></td>
-                                    <td class="tab col s l2"><button class="delete-task-btn waves-effect waves-light btn btn-small red">DELETE</button>
-                                    </td>
-                                    {{!-- <td class="tab col s2 l2"><button
-                                            class="update-task-btn waves-effect waves-light btn btn-small blue">UPDATE</button>
-                                    </td> --}}
-                                
-                                </tr>
-                            <tbody>
-                                <!-- need to use above ID"s as classes to pull for each in handlbars to dynamically create each task in list -->
-                    </div>
-                    </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        </div>
-    
-        <div id="supply-tab" class="col s12">
-            <!-- all supplies category task items will render here when clicked -->
-            <div class="container task-container">
-    
-                <!-- LIST OF TASKS -->
-                <br>
-                <br>
-                <div class="row">
-                    <div class="col s12">
-                        <table class="centered">
-                            <tr class="tabs" id="form-tab">
-                                <form>
-                                    <td class="tab col s3 l2"><input placeholder="New Task Item" id="new-task-description"
-                                            type="text" class="validate"></td>
-                                    {{!-- <td class="tab col s3 l2 input-field">
-                                        <select class="browser-default" name="CategoryTaskTypeId">
-                                            <label>Task Category</label>
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <option value="1">Birthday</option>
-                                            <option value="2">Option 2</option>
-                                            <option value="3">Option 3</option>
-                                        </select>
-                                    </td> --}}
-                                    <td class="tab col s3 l3"><input placeholder="MM/DD/YYYY" id="new-task-complete-by"
-                                            type="date" class="validate"></td>
-                                    {{!-- <td class="tab col s3 l2"><button
-                                            class="delete-task-btn waves-effect waves-light btn btn-small green disabled">COMPLETE
-                                            ME</button></td> --}}
-                                    <td class="tab col s3 l2"><button
-                                            class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
-                                            type="submit">Add task</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </table>
-                        <br>
-                    </div>
-                    <div class="col s12">
-    
-                        <table class="new striped centered">
-                            <thead>
-                                <!-- need to set js to filter these by the appropriate category -->
-                                <tr class="tabs">
-                                    <th class="tab col s3 l2"><a class="active" href=".task-table">Task</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".category-table">Category</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".updated-on-table">Complete
-                                            By:
-                                            MM/DD/YYYY</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".complete-table">Completed</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".delete-table">DELETE
-                                            TASK</a></th>
-                                    {{!-- <th class="tab col s3 l2"><a class="active" href=".update-table">UPDATE
-                                            TASK</a></th> --}}
-                                
-                                </tr>
-                                </thead>
-                                <tr class="tabs">
-                                    <td class="tab col s2 l2">Pick a Theme</td>
-                                    <td class="tab col s2 l2">Preparation</td>
-                                    <td class="tab col s2 l2">06/22/2020</td>
-                                    {{!-- <td class="tab col s2 l2"><button class="delete-task-btn waves-effect waves-light btn btn-small green">COMPLETE
-                                            ME</button></td> --}}
-                                    <td class="tab col s l2"><button class="delete-task-btn waves-effect waves-light btn btn-small red">DELETE</button>
-                                    </td>
-                                    {{!-- <td class="tab col s2 l2"><button
-                                            class="update-task-btn waves-effect waves-light btn btn-small blue">UPDATE</button>
-                                    </td> --}}
-                                
-                                </tr>
-                            <tbody>
-                                <!-- need to use above ID"s as classes to pull for each in handlbars to dynamically create each task in list -->
-                    </div>
-                    </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        </div>
-        <br>
-        <br>
-        <div id="finance-tab" class="col s12">
-            <!-- all financiall category task items will render here when clicked -->
-            <div class="container task-container">
-    
-                <!-- LIST OF TASKS -->
-                <br>
-                <br>
-                <div class="row">
-                    <div class="col s12">
-                        <table class="centered">
-                            <tr class="tabs" id="form-tab">
-                                <form>
-                                    <td class="tab col s3 l2"><input placeholder="New Task Item" id="new-task-description"
-                                            type="text" class="validate"></td>
-                                    {{!-- <td class="tab col s3 l2 input-field">
-                                        <select class="browser-default" name="CategoryTaskTypeId">
-                                            <label>Task Category</label>
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <option value="1">Birthday</option>
-                                            <option value="2">Option 2</option>
-                                            <option value="3">Option 3</option>
-                                        </select>
-                                    </td> --}}
-                                    <td class="tab col s3 l2"><input placeholder="MM/DD/YYYY" id="new-task-complete-by"
-                                            type="date" class="validate"></td>
-                                    {{!-- <td class="tab col s3 l2"><button
-                                            class="delete-task-btn waves-effect waves-light btn btn-small green disabled">COMPLETE
-                                            ME</button></td> --}}
-                                    <td class="tab col s3 l2"><button
-                                            class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
-                                            type="submit">SUBMIT</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </table>
-                        <br>
-                    </div>
-                    <div class="col s12">
-    
-                        <table class="new striped centered">
-                            <thead>
-                                <!-- need to set js to filter these by the appropriate category -->
-                                <tr class="tabs">
-                                    <th class="tab col s3 l2"><a class="active" href=".task-table">Task</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".category-table">Category</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".updated-on-table">Complete
-                                            By:
-                                            MM/DD/YYYY</a></th>
-                                    <th class="tab col s3 l2"><a class="active" href=".complete-table">Completed</a>
-                                    </th>
-                                    <th class="tab col s3 l2"><a class="active" href=".delete-table">DELETE
-                                            TASK</a></th>
-                                    {{!-- <th class="tab col s3 l2"><a class="active" href=".update-table">UPDATE
-                                            TASK</a></th> --}}
-    
-                                </tr>
-                            </thead>
-                            <tr class="tabs">
-                                <td class="tab col s2 l2">Pick a Theme</td>
-                                <td class="tab col s2 l2">Preparation</td>
-                                <td class="tab col s2 l2">06/22/2020</td>
-                                <td class="tab col s2 l2"><button
-                                        class="delete-task-btn waves-effect waves-light btn btn-small green">COMPLETE
-                                        ME</button></td>
-                                <td class="tab col s l2"><button
-                                        class="delete-task-btn waves-effect waves-light btn btn-small red">DELETE</button>
-                                </td>
-                                {{!-- <td class="tab col s2 l2"><button class="update-task-btn waves-effect waves-light btn btn-small blue">UPDATE</button>
-                                </td> --}}
-    
-                            </tr>
-                            <tbody>
-                                <!-- need to use above ID"s as classes to pull for each in handlbars to dynamically create each task in list -->
-                    </div>
-                    </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-        <!-- end tabs -->
-    
-    
-        </div>
-    </main>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
+</main>
 
 
-        $(document).ready(function () {
-            // be sure to hide the form for new task
-            $(".tabs").tabs();
-            $(".fixed-action-btn").floatingActionButton();
-            $(".modal").modal();
-            $(".dropdown-trigger").dropdown();
-            $('select').formSelect();
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
 
 
-            // $(".create-task-btn").on("click", function(event) {
-            //     // be sure to add show for form
-            // })
+    $(document).ready(function () {
+        // be sure to hide the form for new task
+        // $(".tabs").tabs();
+        // $(".fixed-action-btn").floatingActionButton();
+        // $(".modal").modal();
+        // $(".dropdown-trigger").dropdown();
+        // $('select').formSelect();
+
+
+        // $(".create-task-btn").on("click", function(event) {
+        //     // be sure to add show for form
+        // })
+
+        $(document).on("click", ".delete-task-btn", function () {
+            var taskId = $(this).attr("data-id");
+
+            $.ajax({
+                method: "DELETE",
+                url: "/tasks/" + taskId
+            })
+                .then(function () {
+                    location.reload();
+                });
         });
-    </script>
-    <!-- our javascript -->
-    <!-- <script src="../public/js/index.js"></script> -->
-    <!-- <script type="text/javascript" src="../public/js/materialize.js"></script> -->
-    <style>
-        body {
-            /* background-image: url("https://images.unsplash.com/photo-1519219788971-8d9797e0928e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"); */
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-    
-        .task-container {
-            margin-top: 20px;
-            background-color: #b6b2b254;
-            border: none;
-            border-radius: 10px;
-        }
-    
-        #form-tab {
-            background-color: #b6b2b254;
-            color: #000000;
-        }
-    </style>
+
+
+        $(".submit-new-task-btn").on("click", function (event) {
+            event.preventDefault();
+
+            var nameInput = $("input#description");
+            var categoryInput = $("select#CategoryTypeId");
+            var dateInput = $("input#completeByDate");
+            var projectId = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+          
+
+                var taskData = {
+                    description: nameInput.val().trim(),
+                    CategoryTypeId: categoryInput.val(),
+                    ProjectId: projectId
+                };
+
+                if(dateInput.val().trim()){
+                     taskData.completeByDate = dateInput.val().trim()
+                }
+
+                console.log(taskData)
+                
+
+                if (!taskData.description || !taskData.CategoryTypeId) {
+                    return;
+                }
+
+                createNewTask(taskData);
+                nameInput.val("");
+                categoryInput.val("");
+                dateInput.val("");  
+            });
+
+              
+  function createNewTask(taskObj) {
+    $.post("/tasks", taskObj)
+      .then(function(data) {
+          //console.log(data)
+        //window.location.replace("/dashboard");
+        location.reload();
+      });
+  }
+
+
+        });
+</script>
+<!-- our javascript -->
+<!-- <script src="../public/js/index.js"></script> -->
+<!-- <script type="text/javascript" src="../public/js/materialize.js"></script> -->
+<style>
+    body {
+        /* background-image: url("https://images.unsplash.com/photo-1519219788971-8d9797e0928e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"); */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .task-container {
+        margin-top: 20px;
+        background-color: #b6b2b254;
+        border: none;
+        border-radius: 10px;
+    }
+
+    #form-tab {
+        background-color: #b6b2b254;
+        color: #000000;
+    }
+</style>

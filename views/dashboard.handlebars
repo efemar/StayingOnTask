@@ -67,7 +67,16 @@
                     trEle.addClass("tabs");
                     var tdName = $("<td>");
                     tdName.addClass("tab col s3 l3");
-                    tdName.text(data[i].name);
+
+                    var aEle = $("<a>");
+                        aEle.attr("href", "/projects/"+data[i].id)
+                    aEle.text(data[i].name);
+
+                    tdName.append(aEle);
+
+
+
+
                     var tdTask = $("<td>");
                     tdTask.addClass("tab col s3 l3");
                     tdTask.text(data[i].completedTasks + " (/" + data[i].totalTasks + ")");
