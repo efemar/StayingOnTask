@@ -23,14 +23,14 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="user-name" name="userName" type="text">
-                        <label for="user-name">User Name</label>
+                        <label for="user-name"><span id="ast">* </span>User Name</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="password" name="password" type="password">
-                        <label for="password">Password</label>
+                        <label for="password"><span id="ast">* </span>Password</label>
                     </div>
                 </div>
 
@@ -80,7 +80,6 @@ $(document).ready(function() {
   function signUpUser(userObj) {
     $.post("/api/signup", userObj)
       .then(function(data) {
-          console.log(data)
         window.location.replace("/dashboard");
       }).catch(function(error){
           show_modal("modal2");
