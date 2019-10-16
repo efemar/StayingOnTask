@@ -34,7 +34,7 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoute")(app);
 require("./routes/htmlRoute")(app);
 
-var syncOptions = { force: true };
+var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
