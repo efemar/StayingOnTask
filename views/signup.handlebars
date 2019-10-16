@@ -37,8 +37,19 @@
                 <a class="bigButtons waves-effect waves-light btn-large" id="signup-btn">Sign Up</a>
             </form>
         </div>
+
+        <!-- modal alert -->
+    <div id="modal2" class="modal">
+        <div class="modal-content red-text">
+            <h4>User Name is taken!</h4>
+        </div>
+    </div>
+
 </main>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   
     <script>
 
@@ -71,8 +82,21 @@ $(document).ready(function() {
       .then(function(data) {
           console.log(data)
         window.location.replace("/dashboard");
-      })
+      }).catch(function(error){
+          show_modal("modal2");
+        setTimeout(function () { hide_modal("modal2"); }, 3000);
+      });
   }
+
+   function show_modal(modalID) {
+    $('#' + modalID).modal();
+    $('#' + modalID).modal('open');
+}
+
+
+function hide_modal(modalID) {
+    $('#' + modalID).modal('close');
+}
 
 });
 

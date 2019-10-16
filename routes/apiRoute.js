@@ -24,12 +24,6 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  // app.get("/dashboard", isAuthenticated, function(req, res) {
-  //   db.Project.findAll({}).then(function(data) {
-  //     res.render("dashboard", { username: req.user.userName, projects: data });
-  //   });
-  // });
-
   app.get("/dashboard", isAuthenticated, function(req, res) {
     db.Project.findAll({}).then(function() {
       res.render("dashboard", { username: req.user.userName });
@@ -46,6 +40,7 @@ module.exports = function(app) {
 
       for (var i = 0; i < result.length; i++) {
         var projectObj = {};
+        projectObj.id = result[i].dataValues.id;
         projectObj.name = result[i].dataValues.name;
         projectObj.projectDate = moment(
           result[i].dataValues.projectDate,
@@ -64,30 +59,7 @@ module.exports = function(app) {
     });
   });
 
-  // app.get("/projects", function (req, res) {
-  //   db.Project.findAll({
-  //     where: { UserId: req.user.id },
-  //     order: [["projectDate", "ASC"]],
-  //     include: db.Task
-  //   }).then(function (result) {
-  //     var projectArray = [];
-
-  //     for (var i = 0; i < result.length; i++) {
-  //       var projectObj = {};
-  //       projectObj.name = result[i].dataValues.name;
-  //       projectObj.projectDate = moment(result[i].dataValues.projectDate, "YYYY-MM-DD").format("MM/DD/YYYY");
-  //       projectObj.totalTasks = result[i].dataValues.Tasks.length;
-  //       projectObj.completedTasks = result[i].dataValues.Tasks.filter(item => item.complete === true).length;
-  //       projectArray.push(projectObj);
-  //     }
-
-  //     res.json(projectArray);
-  //   });
-  // });
-
   app.post("/projects", function(req, res) {
-    console.log("request body: ", req.body);
-    console.log("request user: ", req.user);
     var newProject = {};
     newProject.name = req.body.name;
     newProject.description = req.body.description;
@@ -106,42 +78,46 @@ module.exports = function(app) {
   });
 
   app.delete("/projects/:id", function(req, res) {
-    db.Project.destroy({ where: { id: req.params.id } }).then(function(result) {
-      res.json(result);
-      // result is number 1
+    db.Task.destroy({
+      where: { ProjectId: req.params.id }
+    }).then(function() {
+      // results is the number of task records deleted
+      db.Project.destroy({ where: { id: req.params.id } }).then(function(
+        result
+      ) {
+        console.log(result);
+        // result is number 1
+        res.json(result);
+      });
     });
   });
 
   app.get("/projects/:id", function(req, res) {
     db.Task.findAll({
       where: { ProjectId: req.params.id },
-      order: [["CategoryTypeId", "ASC"]]
-    }).then(function(result) {
-      res.json(result);
-      /* result will be an array of task objects ordered by task's category type
-      [
-    {
-        "id": 2,
-        "description": "task b",
-        "completed": false,
-        "completeByDate": "2019-11-10",
-        "createdAt": "2019-10-12T04:01:45.000Z",
-        "updatedAt": "2019-10-12T04:01:45.000Z",
-        "ProjectId": 2,
-        "CategoryTypeId": 1
-    },
-    {
-        "id": 1,
-        "description": "task a",
-        "completed": false,
-        "completeByDate": "2019-11-01",
-        "createdAt": "2019-10-12T04:00:17.000Z",
-        "updatedAt": "2019-10-12T04:00:17.000Z",
-        "ProjectId": 2,
-        "CategoryTypeId": 3
-    }
-]
-    */
+      order: [["CategoryTypeId", "ASC"]],
+      include: [db.CategoryType]
+    }).then(function(results) {
+      var tasks = [];
+
+      for (var i = 0; i < results.length; i++) {
+        var taskObj = {};
+        taskObj.id = results[i].dataValues.id;
+        taskObj.task = results[i].dataValues.description;
+        taskObj.category = results[i].dataValues.CategoryType.dataValues.name;
+
+        if (results[i].dataValues.completeByDate) {
+          taskObj.date = results[i].dataValues.completeByDate;
+        } else {
+          taskObj.date = "";
+        }
+
+        taskObj.completed = results[i].dataValues.completed;
+
+        tasks.push(taskObj);
+      }
+
+      res.render("task", { tasks: tasks });
     });
   });
 
