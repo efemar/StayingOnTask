@@ -19,94 +19,96 @@
         <div class="row">
 
             <div id="all-tab" class="col s12">
-                <div class="container task-container">
-
+                <div class="container">
                     <!-- LIST OF TASKS -->
                     <br>
+                    <div class="row">
+                        <div class="col s12 l12 center">
+                            <h3> {{ projectName }}</h3>
+                        </div>
+                    </div>
                     <br>
                     <div class="row">
-                        <div class="col s12">
-                            <table class="centered">
-                                <tr class="tabs" id="form-tab">
-                                    <form>
-                                        <td class="tab col s3 l2"><input id="description" id="new-task-description"
-                                                type="text"></td>
-
-                                        <td class="tab col s3 l2 input-field">
-                                            <select class="browser-default" id="CategoryTypeId">
-                                                <option value="" disabled selected>Choose Task Category</option>
-                                                <option value="1">Preparation</option>
-                                                <option value="2">Communication</option>
-                                                <option value="3">Reservation</option>
-                                                <option value="4">Supplies</option>
-                                                <option value="5">Financial</option>
-                                            </select>
-                                        </td>
-
-                                        <td class="tab col s3 l2"><input id="completeByDate" placeholder="MM/DD/YYYY"
-                                                id="new-task-complete-by" type="date"></td>
-
-                                        <td class="tab col s3 l2"><button
-                                                class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
-                                                type="submit">Add Task</button>
-                                        </td>
-                                    </form>
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s3 l5">
+                                    <i class="material-icons prefix">description</i>
+                                    <input id="description" type="text" class="validate">
+                                    <label for="description"> Task Name</label>
+                                </div>
+                                <div class="input-field col s3 l2">
+                                    {{!-- <i class="material-icons prefix" id="CategoryTypeId">collections</i> --}}
+                                    {{!-- <input id="icon_collections" type="input-field" class="validate"> --}}
+                                    <select class="browser-default" id="CategoryTypeId">
+                                        <option value="" disabled selected>Category</option>
+                                        <option value="1">Preparation</option>
+                                        <option value="2">Communication</option>
+                                        <option value="3">Reservation</option>
+                                        <option value="4">Supplies</option>
+                                        <option value="5">Financial</option>
+                                    </select>
+                                    {{!-- <label for="icon_collections">Category</label> --}}
+                                </div>
+                                <div class="input-field col s2 l3">
+                                    <i class="material-icons prefix">alarm</i>
+                                    <input id="completeByDate" type="date" class="validate">
+                                    <label for="completeByDate">Date</label>
+                                </div>
+                                <div class="input-field col s2 l2">
+                                    <button class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
+                                        type="submit">Add Task</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 l12">
+                        <table class="new striped centered">
+                            <thead>
+                                <!-- need to set js to filter these by the appropriate category -->
+                                <tr style="padding-top: 100px">
+                                    <th class="tab col s3 l5 task-name"><a class="active" href=".task-table">Task</a></th>
+                                    <th class="tab col s3 l2 task-cat"><a class="active" href=".category-table">Category</a>
+                                    </th>
+                                    <th class="tab col s3 l2 task-complete"><a class="active task-complete" href=".updated-on-table">Complete
+                                            By:</a></th>
                                 </tr>
-                            </table>
-                        </div>
+                            </thead>
 
-                        <div class="col s12">
+                            <tbody>
+                                {{#each tasks}}
+                                <tr class="tabs">
+                                    {{#if completed}}
+                                    <td class="task-item col s3 l5 grey-text" style="text-decoration: line-through; text-align: right'">
+                                        {{ task }}</td>
+                                    <td class="task-item col s3 l2 grey-text" style="text-decoration: line-through; text-align: right'">
+                                        {{ category }}</td>
+                                    <td class="task-item col s3 l1 grey-text" style="text-decoration: line-through; text-align: right'">
+                                        {{ date}}</td>
+                                    {{else}}
+                                    <td class="task-item col s3 l5" style="text-align: center">{{ task }}</td>
+                                    <td class="task-item col s3 l2" style="text-align: center"> {{ category }}</td>
+                                    <td class="task-item col s3 l1" style="text-align: center">{{ date}}</td>
+                                    {{/if}}
 
-                            <table class="new striped centered">
-                                <thead>
-                                    <!-- need to set js to filter these by the appropriate category -->
-                                    <tr class="tabs">
-                                        <th class="tab col s3 l2"><a class="active" href=".task-table">Task</a></th>
-                                        <th class="tab col s3 l2"><a class="active" href=".category-table">Category</a>
-                                        </th>
-                                        <th class="tab col s3 l2"><a class="active" href=".updated-on-table">Complete
-                                                By:
-                                                MM/DD/YYYY</a></th>
-                                        <th class="tab col s3 l2"><a class="active" href=".complete-table">Completed</a>
-                                        </th>
-                                        <th class="tab col s3 l2"><a class="active" href=".delete-table">DELETE
-                                                TASK</a></th>
+                                    <td class="tab col s3 l1">
+                                        {{#if completed}}<button
+                                            class="uncomplete-task-btn change-state waves-effect waves-light btn btn-small grey"
+                                            data-id="{{id}}" data-newstate="false">Uncomplete</button>
+                                        {{else}}<button
+                                            class="complete-task-btn change-state waves-effect waves-light btn btn-small green"
+                                            data-id="{{id}}" data-newstate="true">Complete</button>{{/if}}
+                                    </td>
+                                    <td class="tab col s3 l1"><button
+                                            class="delete-task-btn waves-effect waves-light btn btn-small red"
+                                            data-id="{{id}}">DELETE</button>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
 
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    {{#each tasks}}
-
-                                    <tr class="tabs">
-                                        <td class="tab col s2 l2">{{ task }}</td>
-                                        <td class="tab col s2 l2"> {{ category }}</td>
-                                        <td class="tab col s2 l2">{{ date}}</td>
-
-
-                                        <td class="tab col s2 l2">
-
-                                            {{#if completed}}<button
-                                                class="uncomplete-task-btn waves-effect waves-light btn btn-small yellow"
-                                                data-id="{{id}}">Uncomplete</button>
-
-                                            {{else}}<button
-                                                class="complete-task-btn waves-effect waves-light btn btn-small green"
-                                                data-id="{{id}}">Complete</button>{{/if}}
-
-                                        </td>
-                                        <td class="tab col s l2"><button
-                                                class="delete-task-btn waves-effect waves-light btn btn-small red"
-                                                data-id="{{id}}">DELETE</button>
-                                        </td>
-                                    </tr>
-                                    {{/each}}
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
+                        </table>
 
                     </div>
 
@@ -115,19 +117,22 @@
             </div>
 
         </div>
-        <!-- modal alerts -->
-        <div id="modal3" class="modal">
-            <div class="modal-content red-text">
-                <h4>Please enter task name!</h4>
-            </div>
+
+    </div>
+
+    <!-- modal alerts -->
+    <div id="modal3" class="modal">
+        <div class="modal-content red-text">
+            <h4>Please enter task name!</h4>
         </div>
+    </div>
 
 
-        <div id="modal4" class="modal">
-            <div class="modal-content red-text">
-                <h4>Please choose task type!</h4>
-            </div>
+    <div id="modal4" class="modal">
+        <div class="modal-content red-text">
+            <h4>Please choose task type!</h4>
         </div>
+    </div>
 </main>
 
 
@@ -217,7 +222,45 @@
         function hide_modal(modalID) {
             $('#' + modalID).modal('close');
         }
+        $(".complete-task-btn").on("click", function (event) {
+            event.preventDefault();
 
+            var taskId = $(this).attr("data-id");
+            var newState = $(this).data("newstate");
+            var newTaskState = {
+                completed: newState
+            };
+
+            $.ajax({
+                method: "PUT",
+                url: "/tasks/" + taskId,
+                data: newTaskState
+            })
+                .then(function () {
+                    location.reload();
+                });
+
+        });
+
+
+        $(".uncomplete-task-btn").on("click", function (event) {
+            event.preventDefault();
+
+            var taskId = $(this).attr("data-id");
+            var newState = $(this).data("newstate");
+            var newTaskState = {
+                completed: newState
+            };
+
+            $.ajax({
+                method: "PUT",
+                url: "/tasks/" + taskId,
+                data: newTaskState
+            })
+                .then(function () {
+                    location.reload();
+                });
+        });
 
     });
 </script>
@@ -225,22 +268,11 @@
 <!-- <script src="../public/js/index.js"></script> -->
 <!-- <script type="text/javascript" src="../public/js/materialize.js"></script> -->
 <style>
-    body {
-        /* background-image: url("https://images.unsplash.com/photo-1519219788971-8d9797e0928e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"); */
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
+    .task-item {
+        overflow: auto;
     }
 
-    .task-container {
-        margin-top: 20px;
-        background-color: #b6b2b254;
-        border: none;
-        border-radius: 10px;
-    }
-
-    #form-tab {
-        background-color: #b6b2b254;
-        color: #000000;
-    }
+ .task-name {
+     padding-top: 20px;
+ }
 </style>

@@ -31,7 +31,7 @@
                     <thead>
                         <tr class="tabs">
                             <th class="tab col s3 l3"><a class="active" href="#test1">Project Name</a></th>
-                            <th class="tab col s3 l3"><a class="active" href="#test2"># of Completed Tasks</a></th>
+                            <th class="tab col s3 l3"><a class="active" href="#test2">Completed Tasks</a></th>
                             <th class="tab col s3 l3"><a class="active" href="#test4">Complete By</a></th>
                         </tr>
                     </thead>
@@ -62,6 +62,7 @@
         $.get("/projects", function (data) {
             
             if (data.length > 0) {
+                $("#emptyProjects").css("display", "none");
                 for (var i = 0; i < data.length; i++) {
                     var trEle = $("<tr>");
                     trEle.addClass("tabs");
@@ -117,8 +118,3 @@
     });
 </script>
 
-<style>
-    #emptyProjects {
-        display: none;
-    }
-</style>
