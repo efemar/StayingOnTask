@@ -114,7 +114,11 @@ module.exports = function(app) {
         taskObj.completed = results[i].dataValues.completed;
         tasks.push(taskObj);
       }
-      res.render("task", { tasks: tasks, username: req.user.userName, projectName: projectName });
+      res.render("task", {
+        tasks: tasks,
+        username: req.user.userName,
+        projectName: projectName
+      });
     });
   });
 
