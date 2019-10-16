@@ -60,7 +60,7 @@
 <script>
     $(document).ready(function () {
         $.get("/projects", function (data) {
-            console.log(data);
+            
             if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
                     var trEle = $("<tr>");
@@ -104,7 +104,6 @@
 
         $(document).on("click", ".delete-project-btn", function () {
             var projectId = $(this).attr("data-projectid");
-            console.log(projectId);
 
             $.ajax({
                 method: "DELETE",

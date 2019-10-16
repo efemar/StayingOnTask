@@ -9,6 +9,7 @@
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li>Hello, {{ username }}</li>
+                        <li><a href="/dashboard" class="topNavSearch">Dashboard</a></li>
                         <li><a href="/logout" class="topNavSearch">Log Out</a></li>
                     </ul>
                 </div>
@@ -114,6 +115,19 @@
             </div>
 
         </div>
+        <!-- modal alerts -->
+        <div id="modal3" class="modal">
+            <div class="modal-content red-text">
+                <h4>Please enter task name!</h4>
+            </div>
+        </div>
+
+
+        <div id="modal4" class="modal">
+            <div class="modal-content red-text">
+                <h4>Please choose task type!</h4>
+            </div>
+        </div>
 </main>
 
 
@@ -158,43 +172,54 @@
             var categoryInput = $("select#CategoryTypeId");
             var dateInput = $("input#completeByDate");
             var projectId = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
-          
-
-                var taskData = {
-                    description: nameInput.val().trim(),
-                    CategoryTypeId: categoryInput.val(),
-                    ProjectId: projectId
-                };
-
-                if(dateInput.val().trim()){
-                     taskData.completeByDate = dateInput.val().trim()
-                }
-
-                console.log(taskData)
-                
-
-                if (!taskData.description || !taskData.CategoryTypeId) {
-                    return;
-                }
-
-                createNewTask(taskData);
-                nameInput.val("");
-                categoryInput.val("");
-                dateInput.val("");  
-            });
-
-              
-  function createNewTask(taskObj) {
-    $.post("/tasks", taskObj)
-      .then(function(data) {
-          //console.log(data)
-        //window.location.replace("/dashboard");
-        location.reload();
-      });
-  }
 
 
+            var taskData = {
+                description: nameInput.val().trim(),
+                CategoryTypeId: categoryInput.val(),
+                ProjectId: projectId
+            };
+
+            if (dateInput.val().trim()) {
+                taskData.completeByDate = dateInput.val().trim()
+            }
+
+            if (!taskData.description) {
+                show_modal("modal3");
+                setTimeout(function () { hide_modal("modal3"); }, 2000);
+                return;
+            } else if (!taskData.CategoryTypeId) {
+                show_modal("modal4");
+                setTimeout(function () { hide_modal("modal4"); }, 2000);
+                return;
+            }
+
+            createNewTask(taskData);
+            nameInput.val("");
+            categoryInput.val("");
+            dateInput.val("");
         });
+
+
+        function createNewTask(taskObj) {
+            $.post("/tasks", taskObj)
+                .then(function (data) {
+                    location.reload();
+                });
+        }
+
+        function show_modal(modalID) {
+            $('#' + modalID).modal();
+            $('#' + modalID).modal('open');
+        }
+
+
+        function hide_modal(modalID) {
+            $('#' + modalID).modal('close');
+        }
+
+
+    });
 </script>
 <!-- our javascript -->
 <!-- <script src="../public/js/index.js"></script> -->

@@ -6,19 +6,21 @@ module.exports = function(app) {
   });
 
   app.get("/signup", function(req, res) {
-    // If the user already has logged in, send them to the dashboard page
+    //If the user already has logged in, send them to the dashboard page
     if (req.user) {
       res.redirect("/dashboard");
+    } else {
+      res.render("signup");
     }
-    res.render("signup");
   });
 
   app.get("/login", function(req, res) {
     // If the user already has logged in, send them to the dashboard page
     if (req.user) {
       res.redirect("/dashboard");
+    } else {
+      res.render("login");
     }
-    res.render("login");
   });
 
   app.get("/newprojects", isAuthenticated, function(req, res) {

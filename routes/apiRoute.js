@@ -25,9 +25,7 @@ module.exports = function(app) {
   });
 
   app.get("/dashboard", isAuthenticated, function(req, res) {
-    db.Project.findAll({}).then(function() {
-      res.render("dashboard", { username: req.user.userName });
-    });
+    res.render("dashboard", { username: req.user.userName });
   });
 
   app.get("/projects", isAuthenticated, function(req, res) {
@@ -50,7 +48,7 @@ module.exports = function(app) {
         projectObj.completedTasks = result[i].dataValues.Tasks.filter(function(
           item
         ) {
-          return item.complete === true;
+          return item.completed === true;
         }).length;
         projectArray.push(projectObj);
       }
@@ -82,17 +80,16 @@ module.exports = function(app) {
       where: { ProjectId: req.params.id }
     }).then(function() {
       // results is the number of task records deleted
-      db.Project.destroy({ where: { id: req.params.id } }).then(function(
-        result
-      ) {
-        console.log(result);
+      db.Project.destroy({
+        where: { id: req.params.id }
+      }).then(function(result) {
         // result is number 1
         res.json(result);
       });
     });
   });
 
-  app.get("/projects/:id", function(req, res) {
+  app.get("/projects/:id", isAuthenticated, function(req, res) {
     db.Task.findAll({
       where: { ProjectId: req.params.id },
       order: [["CategoryTypeId", "ASC"]],
@@ -117,7 +114,7 @@ module.exports = function(app) {
         tasks.push(taskObj);
       }
 
-      res.render("task", { tasks: tasks });
+      res.render("task", { tasks: tasks, username: req.user.userName });
     });
   });
 
