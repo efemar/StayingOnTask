@@ -93,28 +93,28 @@ module.exports = function(app) {
     db.Task.findAll({
       where: { ProjectId: req.params.id },
       order: [["CategoryTypeId", "ASC"]],
-      include: [db.CategoryType]
+      include: [db.CategoryType, db.Project]
     }).then(function(results) {
       var tasks = [];
+      var projectName = results[0].dataValues.Project.dataValues.name;
 
       for (var i = 0; i < results.length; i++) {
         var taskObj = {};
         taskObj.id = results[i].dataValues.id;
         taskObj.task = results[i].dataValues.description;
         taskObj.category = results[i].dataValues.CategoryType.dataValues.name;
-
         if (results[i].dataValues.completeByDate) {
-          taskObj.date = results[i].dataValues.completeByDate;
+          taskObj.date = moment(
+            results[i].dataValues.completeByDate,
+            "YYYY-MM-DD"
+          ).format("MM/DD/YYYY");
         } else {
           taskObj.date = "";
         }
-
         taskObj.completed = results[i].dataValues.completed;
-
         tasks.push(taskObj);
       }
-
-      res.render("task", { tasks: tasks, username: req.user.userName });
+      res.render("task", { tasks: tasks, username: req.user.userName, projectName: projectName });
     });
   });
 
