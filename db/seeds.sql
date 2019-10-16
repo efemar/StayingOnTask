@@ -1,6 +1,9 @@
 USE exampledb;
 
-INSERT INTO ProjectTypes SET name="birthday",createdAt=now(),updatedAt=now();
+INSERT INTO ProjectTypes (name,createdAt,updatedAt)
+values("birthday", now(), now());
+
+USE exampledb;
 
 INSERT INTO CategoryTypes(name,createdAt,updatedAt) 
 VALUES ("preparation", now(), now()),
@@ -8,6 +11,8 @@ VALUES ("preparation", now(), now()),
 ("reservation", now(), now()),
 ("supplies", now(), now()),
 ("financial", now(), now());
+
+USE exampledb;
 
 INSERT INTO TemplateTasks(description,createdAt,updatedAt,ProjectTypeId, CategoryTypeId) 
 VALUES 
