@@ -1,6 +1,3 @@
-.list-group-item {
-  line-height: 2.5;
-}
 
 html {
   position: relative;
@@ -20,14 +17,41 @@ body {
 #homePage {
   height: auto;
   background-image: url(../images/road-220058_1280.jpg);
-  background-repeat: no-repeat, repeat;
-  background-size: inherit;
+  background-repeat: repeat;
 
-/* @media only screen and (max-width: 941px) {
+}
+
+#road {
+  text-align: center;
+}
+
+.centerText {
+  margin-top: 100px;
+}
+
+#project {
+  margin-bottom: 200px
+}
+
+@media only screen and (max-width: 941px) {
   .firstPage {
     height: auto;
     background-image: url(../images/road-220058_1280.jpg);
     background-repeat: no-repeat, repeat;
     background-size: inherit;
     /* background-size:; */
-  } */
+    
+  }
+
+#emptyProjects {
+    display: none;
+}
+
+#road {
+  text-align: center;
+}
+
+.centerText {
+  margin-top: 100px;
+}
+}
