@@ -14,8 +14,10 @@ body {
   width: 100%;
 }
 
+
 #homePage {
-  height: auto;
+  height: 600px;
+  width: auto;
   background-image: url(../images/road-220058_1280.jpg);
   background-repeat: repeat;
 
@@ -54,4 +56,20 @@ body {
 .centerText {
   margin-top: 100px;
 }
+}
+
+.navigation {
+  background-color: #009688;
+}
+
+.task-item {
+  overflow: auto;
+  overflow-y: hidden;
+  margin-top: 10px;
+}
+.task-item1{
+  margin-top: 10px;
+}
+.task-name {
+padding-top: 20px;
 }
