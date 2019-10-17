@@ -5,7 +5,6 @@
         <nav class=" navigation">
             <div class="container">
                 <div class="nav-wrapper ">
-
                     <!-- Navigation Links -->
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -15,6 +14,10 @@
                 </div>
             </div>
         </nav>
+        <ul class="sidenav" id="mobile-demo">
+            <li>Hello, {{ username }}</li>
+            <li><a href="/logout" class="topNavSearch">Log Out</a></li>
+        </ul>
     </div>
     <br>
     <br>
@@ -30,7 +33,7 @@
                 <table class="striped centered">
                     <thead>
                         <tr class="tabs">
-                            <th class="tab col s3 l3"><a class="active" href="#test1">Project Name</a></th>
+                            <th class="tab col s3 l5"><a class="active" href="#test1">Project Name</a></th>
                             <th class="tab col s3 l3"><a class="active" href="#test2">Completed Tasks</a></th>
                             <th class="tab col s3 l3"><a class="active" href="#test4">Complete By</a></th>
                         </tr>
@@ -56,27 +59,24 @@
 </main>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="../js/materialize.js"></script>
 <script>
     $(document).ready(function () {
         $.get("/projects", function (data) {
-            
+
             if (data.length > 0) {
                 $("#emptyProjects").css("display", "none");
                 for (var i = 0; i < data.length; i++) {
                     var trEle = $("<tr>");
                     trEle.addClass("tabs");
                     var tdName = $("<td>");
-                    tdName.addClass("tab col s3 l3");
+                    tdName.addClass("tab col s3 l5");
 
                     var aEle = $("<a>");
-                        aEle.attr("href", "/projects/"+data[i].id)
+                    aEle.attr("href", "/projects/" + data[i].id)
                     aEle.text(data[i].name);
 
                     tdName.append(aEle);
-
-
-
 
                     var tdTask = $("<td>");
                     tdTask.addClass("tab col s3 l3");
@@ -85,7 +85,7 @@
                     tdDate.addClass("tab col s3 l3");
                     tdDate.text(data[i].projectDate);
                     var tdDelete = $("<td>");
-                    tdDelete.addClass("tab col s3 l3");
+                    tdDelete.addClass("tab col s3 l1");
                     var button = $("<button>");
                     button.addClass("delete-project-btn waves-effect waves-light btn btn-small red");
                     button.attr("data-projectid", data[i].id);
@@ -111,10 +111,9 @@
                 url: "/projects/" + projectId
             })
                 .then(function () {
-                     window.location.href = "/dashboard";
+                    window.location.href = "/dashboard";
                 });
         })
 
     });
 </script>
-

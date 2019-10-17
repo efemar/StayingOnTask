@@ -1,104 +1,250 @@
 <main>
-    <div id="signup">
+    <div id="tasks" class="Third Page ">
         <!-- Navigation bar -->
         <nav class=" navigation">
             <div class="container">
                 <div class="nav-wrapper ">
-
                     <!-- Navigation Links -->
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="/" class="topNavHome">Home</a></li>
-                        <li><a href="/aboutUs" class="topNavSearch">About Us</a></li>
+                        <li>Hello, {{ username }}</li>
+                        <li><a href="/dashboard" class="topNavSearch">Dashboard</a></li>
+                        <li><a href="/logout" class="topNavSearch">Log Out</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-    </div>
-    <br>
-    <br>
-
-    <div class="container">
-            <form class="signup">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="user-name" name="userName" type="text">
-                        <label for="user-name"><span id="ast">* </span>User Name</label>
+        <ul class="sidenav" id="mobile-demo">
+            <li>Hello, {{ username }}</li>
+            <li><a href="/dashboard" class="topNavSearch">Dashboard</a></li>
+            <li><a href="/logout" class="topNavSearch">Log Out</a></li>
+        </ul>
+        <div class="row">
+            <div id="all-tab" class="col s12">
+                <div class="container">
+                    <!-- LIST OF TASKS -->
+                    <br>
+                    <div class="row">
+                        <div class="col s12 l12 center">
+                            <h3> {{ projectName }}</h3>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12 m8 l5">
+                                    <i class="material-icons prefix">description</i>
+                                    <input id="description" type="text" class="validate">
+                                    <label for="description"> Task Name</label>
+                                </div>
+                                <div class="input-field col s12 m8 l2">
+                                    {{!-- <i class="material-icons prefix" id="CategoryTypeId">collections</i> --}}
+                                    {{!-- <input id="icon_collections" type="input-field" class="validate"> --}}
+                                    <select class="browser-default" id="CategoryTypeId">
+                                        <option value="" disabled selected>Category</option>
+                                        <option value="1">Preparation</option>
+                                        <option value="2">Communication</option>
+                                        <option value="3">Reservation</option>
+                                        <option value="4">Supplies</option>
+                                        <option value="5">Financial</option>
+                                    </select>
+                                    {{!-- <label for="icon_collections">Category</label> --}}
+                                </div>
+                                <div class="input-field col s12 m8 l3">
+                                    <i class="material-icons prefix">alarm</i>
+                                    <input id="completeByDate" type="date" class="validate">
+                                    <label for="completeByDate">Date</label>
+                                </div>
+                                <div class="input-field col s12 m8 l2">
+                                    <button class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
+                                        type="submit">Add Task</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input id="password" name="password" type="password">
-                        <label for="password"><span id="ast">* </span>Password</label>
+                    <div class="col s12 l12">
+                        <table class="new striped centered">
+                            <thead>
+                                <!-- need to set js to filter these by the appropriate category -->
+                                <tr style="padding-top: 100px">
+                                    <th class="tab col s4 l5 task-name"><a class="active" href=".task-table">Task</a>
+                                    </th>
+                                    <th class="tab col s4 l2 task-cat"><a class="active"
+                                            href=".category-table">Category</a>
+                                    </th>
+                                    <th class="tab col s4 l2 task-complete"><a class="active task-complete"
+                                            href=".updated-on-table">Complete
+                                            By:</a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each tasks}}
+                                <tr class="tabs">
+                                    {{#if completed}}
+                                    <td class="task-item col s3 l5 grey-text"
+                                        style="text-decoration: line-through; text-align: right'">
+                                        {{ task }}</td>
+                                    <td class="task-item col s3 l2 grey-text"
+                                        style="text-decoration: line-through; text-align: right'">
+                                        {{ category }}</td>
+                                    <td class="task-item col s3 l1 grey-text"
+                                        style="text-decoration: line-through; text-align: right'">
+                                        {{ date}}</td>
+                                    {{else}}
+                                    <td class="task-item col s12 m6 l5" style="text-align: center">{{ task }}</td>
+                                    <td class="task-item1 col s4 m2 l2" style="text-align: center"> {{ category }}</td>
+                                    <td class="task-item1 col s4 m2 l3" style="text-align: center">{{ date}}</td>
+                                    {{/if}}
+                                    <td class="tab col s3 m2 l1">
+                                        {{#if completed}}<button
+                                            class="uncomplete-task-btn change-state waves-effect waves-light btn btn-small grey"
+                                            data-id="{{id}}" data-newstate="false">Uncomplete</button>
+                                        {{else}}<button
+                                            class="complete-task-btn change-state waves-effect waves-light btn btn-small green"
+                                            data-id="{{id}}" data-newstate="true">Complete</button>{{/if}}
+                                        {{!-- </td>
+                                    <td class="tab col s3 l1"> --}}
+                                        <button class="delete-task-btn waves-effect waves-light btn btn-small red"
+                                            data-id="{{id}}">DELETE</button>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <a class="bigButtons waves-effect waves-light btn-large" id="signup-btn">Sign Up</a>
-            </form>
+            </div>
         </div>
-
-        <!-- modal alert -->
-    <div id="modal2" class="modal">
+    </div>
+    <!-- modal alerts -->
+    <div id="modal3" class="modal">
         <div class="modal-content red-text">
-            <h4>User Name is taken!</h4>
+            <h4>Please enter task name!</h4>
         </div>
     </div>
-
+    <div id="modal4" class="modal">
+        <div class="modal-content red-text">
+            <h4>Please choose task type!</h4>
+        </div>
+    </div>
 </main>
-       <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
-    <script>
-
-$(document).ready(function() {
-  // Getting references to our form and input
-  var usernameInput = $("input#user-name");
-  var passwordInput = $("input#password");
-
-  $("#signup-btn").on("click", function(event) {
-
-    event.preventDefault();
-
-    var userData = {
-      userName: usernameInput.val().trim(),
-      password: passwordInput.val().trim()
-    };
-
-    if (!userData.userName || !userData.password) {
-      return;
+<script>
+    $(document).ready(function () {
+        // be sure to hide the form for new task
+        // $(".tabs").tabs();
+        // $(".fixed-action-btn").floatingActionButton();
+        // $(".modal").modal();
+        // $(".dropdown-trigger").dropdown();
+        // $('select').formSelect();
+        // $(".create-task-btn").on("click", function(event) {
+        //     // be sure to add show for form
+        // })
+        $(document).on("click", ".delete-task-btn", function () {
+            var taskId = $(this).attr("data-id");
+            $.ajax({
+                method: "DELETE",
+                url: "/tasks/" + taskId
+            })
+                .then(function () {
+                    location.reload();
+                });
+        });
+        $(".submit-new-task-btn").on("click", function (event) {
+            event.preventDefault();
+            var nameInput = $("input#description");
+            var categoryInput = $("select#CategoryTypeId");
+            var dateInput = $("input#completeByDate");
+            var projectId = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+            var taskData = {
+                description: nameInput.val().trim(),
+                CategoryTypeId: categoryInput.val(),
+                ProjectId: projectId
+            };
+            if (dateInput.val().trim()) {
+                taskData.completeByDate = dateInput.val().trim()
+            }
+            if (!taskData.description) {
+                show_modal("modal3");
+                setTimeout(function () { hide_modal("modal3"); }, 2000);
+                return;
+            } else if (!taskData.CategoryTypeId) {
+                show_modal("modal4");
+                setTimeout(function () { hide_modal("modal4"); }, 2000);
+                return;
+            }
+            createNewTask(taskData);
+            nameInput.val("");
+            categoryInput.val("");
+            dateInput.val("");
+        });
+        function createNewTask(taskObj) {
+            $.post("/tasks", taskObj)
+                .then(function (data) {
+                    location.reload();
+                });
+        }
+        function show_modal(modalID) {
+            $('#' + modalID).modal();
+            $('#' + modalID).modal('open');
+        }
+        function hide_modal(modalID) {
+            $('#' + modalID).modal('close');
+        }
+        $(".complete-task-btn").on("click", function (event) {
+            event.preventDefault();
+            var taskId = $(this).attr("data-id");
+            var newState = $(this).data("newstate");
+            var newTaskState = {
+                completed: newState
+            };
+            $.ajax({
+                method: "PUT",
+                url: "/tasks/" + taskId,
+                data: newTaskState
+            })
+                .then(function () {
+                    location.reload();
+                });
+        });
+        $(".uncomplete-task-btn").on("click", function (event) {
+            event.preventDefault();
+            var taskId = $(this).attr("data-id");
+            var newState = $(this).data("newstate");
+            var newTaskState = {
+                completed: newState
+            };
+            $.ajax({
+                method: "PUT",
+                url: "/tasks/" + taskId,
+                data: newTaskState
+            })
+                .then(function () {
+                    location.reload();
+                });
+        });
+    });
+</script>
+<!-- our javascript -->
+<!-- <script src="../public/js/index.js"></script> -->
+<!-- <script type="text/javascript" src="../public/js/materialize.js"></script> -->
+<style>
+    .task-item {
+        overflow: auto;
+        overflow-y: hidden;
+        margin-top: 10px;
     }
-   
-    signUpUser(userData);
-    usernameInput.val("");
-    passwordInput.val("");
-  });
 
-  
-  function signUpUser(userObj) {
-    $.post("/api/signup", userObj)
-      .then(function(data) {
-        window.location.replace("/dashboard");
-      }).catch(function(error){
-          show_modal("modal2");
-        setTimeout(function () { hide_modal("modal2"); }, 3000);
-      });
-  }
+    .task-item1 {
+        margin-top: 10px;
+    }
 
-   function show_modal(modalID) {
-    $('#' + modalID).modal();
-    $('#' + modalID).modal('open');
-}
-
-
-function hide_modal(modalID) {
-    $('#' + modalID).modal('close');
-}
-
-});
-
-
-
-    </script>
+    .task-name {
+        padding-top: 20px;
+    }
+</style>
