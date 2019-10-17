@@ -58,7 +58,7 @@
                                     <label for="completeByDate">Complete by:</label>
                                 </div>
                                 <div class="input-field col s12 m8 l2">
-                                    <button class="submit-new-task-btn waves-effect waves-light btn btn-small blue"
+                                    <button class="submit-new-task-btn waves-effect waves-light btn btn-small" style="background-color:#009688"
                                         type="submit">Add Task</button>
                                 </div>
                             </div>
@@ -87,29 +87,29 @@
                                 <tr class="tabs">
                                     {{#if completed}}
                                     <td class="task-item col s3 l5 grey-text"
-                                        style="text-decoration: line-through; text-align: right'">
+                                        style="text-decoration: line-through;">
                                         {{ task }}</td>
                                     <td class="task-item col s3 l2 grey-text"
-                                        style="text-decoration: line-through; text-align: right'">
+                                        style="text-decoration: line-through;">
                                         {{ category }}</td>
-                                    <td class="task-item col s3 l1 grey-text"
-                                        style="text-decoration: line-through; text-align: right'">
+                                    <td class="task-item col s3 l2 grey-text"
+                                        style="text-decoration: line-through;">
                                         {{ date}}</td>
                                     {{else}}
-                                    <td class="task-item col s12 m6 l5" style="text-align: center">{{ task }}</td>
-                                    <td class="task-item1 col s4 m2 l2" style="text-align: center"> {{ category }}</td>
-                                    <td class="task-item1 col s4 m2 l3" style="text-align: center">{{ date}}</td>
+                                    <td class="task-item col s12 m6 l5" style="text-align: center, white-space: wrap">{{ task }}</td>
+                                    <td class="task-item1 col s4 m2 l2" style="text-align: center, white-space: wrap"> {{ category }}</td>
+                                    <td class="task-item1 col s4 m2 l2" style="text-align: center, white-space: wrap">{{ date}}</td>
                                     {{/if}}
 
                                     <td class="tab col s3 m2 l1">
                                         {{#if completed}}<button
                                             class="uncomplete-task-btn change-state waves-effect waves-light btn btn-small grey"
-                                            data-id="{{id}}" data-newstate="false">Uncomplete</button>
+                                            data-id="{{id}}" data-newstate="false">Done</button>
                                         {{else}}<button
                                             class="complete-task-btn change-state waves-effect waves-light btn btn-small green"
                                             data-id="{{id}}" data-newstate="true">Complete</button>{{/if}}
-                                        {{!-- </td>
-                                    <td class="tab col s3 l1"> --}}
+                                        </td>
+                                    <td class="tab col s3 l1">
                                         <button class="delete-task-btn waves-effect waves-light btn btn-small red"
                                             data-id="{{id}}">DELETE</button>
                                     </td>

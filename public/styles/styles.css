@@ -18,9 +18,8 @@ body {
 #homePage {
   height: 600px;
   width: auto;
-  background-image: url(../images/road-220058_1280.jpg);
-  background-repeat: repeat;
-
+  background: url(../images/road-220058_1280.jpg) no-repeat center center fixed;
+  background-size: cover;
 }
 
 #road {
@@ -36,13 +35,12 @@ body {
 }
 
 @media only screen and (max-width: 941px) {
-  .firstPage {
-    height: auto;
-    background-image: url(../images/road-220058_1280.jpg);
-    background-repeat: no-repeat, repeat;
-    background-size: inherit;
-    /* background-size:; */
-    
+  
+  #homePage {
+    height: 600px;
+    width: auto;
+    background: url(../images/road-220058_1280.jpg) no-repeat center center fixed;
+    background-size: cover;
   }
 
 #emptyProjects {
@@ -73,3 +71,4 @@ body {
 .task-name {
 padding-top: 20px;
 }
+
