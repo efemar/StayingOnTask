@@ -18,7 +18,7 @@ This app uses MySQL, Node.js, HTML, Javascript, Express, Passport, Handlebars an
 
 1) User has an authentication page for login and sign up. 
 
-<img scr="public/images/login.png">
+<img src="public/images/login.png">
 
 2)	Users can add projects with prepopulated tasks
 
