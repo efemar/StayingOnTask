@@ -18,21 +18,21 @@ This app uses MySQL, Node.js, HTML, Javascript, Express, Passport, Handlebars an
 
 1) User has an authentication page for login and sign up. 
 
-<img scr="/images/login.png">
+<img scr="public/images/login.png">
 
 2)	Users can add projects with prepopulated tasks
 
-<img src="/images/empty-dashboard.png">
+<img src="public/images/empty-dashboard.png">
 
-<img src="/images/add-project.png">
+<img src="public/images/add-project.png">
 
 3)	A dashboard with a list of all of the projects for that user
 
-<img src="/images/dashboard.png">
+<img src="public/images/dashboard.png">
 
 4)	A task page with all of the tasks under that project
 
-<img src="/images/task.png">
+<img src="public/images/task.png">
 
 Notes: Users can add their own tasks, if they so chose and delete the prepopulated tasks.
 
